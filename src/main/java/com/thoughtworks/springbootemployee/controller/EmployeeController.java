@@ -2,16 +2,22 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.Data.Employees;
 import com.thoughtworks.springbootemployee.model.Employee;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.thoughtworks.springbootemployee.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
+
+    private final EmployeeService employeeService;
+
+    @Autowired
+    EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping
     public List<Employee> getEmployees() {
@@ -21,5 +27,13 @@ public class EmployeeController {
     @GetMapping("/{employeeID}")
     public Employee getEmployee(@PathVariable Integer employeeID) {
         return Employees.employees.stream().filter(employee -> employee.getId().equals(employeeID)).findFirst().orElse(null);
+    }
+
+    @PutMapping
+    public String updateEmployee(@RequestBody Employee employee) {
+        if (employee.getId() == null) {
+            return "ID is empty";
+        }
+        return employeeService.update(employee) ? "success" : "fail";
     }
 }
