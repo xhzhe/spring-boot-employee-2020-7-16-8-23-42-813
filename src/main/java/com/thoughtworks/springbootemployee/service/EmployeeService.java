@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 
 public interface EmployeeService {
     boolean update(Employee employee);
+
+    String delete(Integer employeeID);
 }

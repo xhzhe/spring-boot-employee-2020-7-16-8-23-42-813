@@ -27,4 +27,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return true;
     }
+
+    @Override
+    public String delete(Integer employeeID) {
+        Employee employeeInDatabase = Employees.employees.stream()
+                .filter(staff -> staff.getId().equals(employeeID))
+                .findFirst()
+                .orElse(null);
+        if (employeeInDatabase == null) {
+            return "not find";
+        }
+        Employees.employees.remove(employeeInDatabase);
+        return "success";
+    }
 }

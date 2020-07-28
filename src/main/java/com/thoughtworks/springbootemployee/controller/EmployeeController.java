@@ -36,4 +36,9 @@ public class EmployeeController {
         }
         return employeeService.update(employee) ? "success" : "fail";
     }
+
+    @DeleteMapping("/{employeeID}")
+    public String deleteEmployee(@PathVariable Integer employeeID){
+        return employeeService.delete(employeeID);
+    }
 }
