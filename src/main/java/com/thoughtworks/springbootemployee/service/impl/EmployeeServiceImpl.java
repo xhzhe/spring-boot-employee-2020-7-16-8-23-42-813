@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+
+    public static final String SUCCESS = "success";
+    public static final String NOT_FIND = "not find";
+    public static final String ID_INPUT_WRONG_MESSAGE = "id input is forbidden";
+
     @Override
     public boolean update(Employee employee) {
         Employee employeeInDatabase = Employees.employees.stream()
@@ -35,9 +40,18 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .findFirst()
                 .orElse(null);
         if (employeeInDatabase == null) {
-            return "not find";
+            return NOT_FIND;
         }
         Employees.employees.remove(employeeInDatabase);
-        return "success";
+        return SUCCESS;
+    }
+
+    @Override
+    public String add(Employee employee) {
+        if (employee.getId() != null) {
+            return ID_INPUT_WRONG_MESSAGE;
+        }
+        Employees.addEmployee(employee);
+        return SUCCESS;
     }
 }

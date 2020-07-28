@@ -8,4 +8,6 @@ public interface EmployeeService {
     boolean update(Employee employee);
 
     String delete(Integer employeeID);
+
+    String add(Employee employee);
 }
