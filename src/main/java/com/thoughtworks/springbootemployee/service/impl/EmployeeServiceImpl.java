@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    public static final String SUCCESS = "success";
-    public static final String NOT_FIND = "not find";
-    public static final String ID_INPUT_WRONG_MESSAGE = "id input is forbidden";
+    private static final String SUCCESS = "success";
+    private static final String NOT_FIND = "not find";
+    private static final String ID_INPUT_WRONG_MESSAGE = "id input is forbidden";
 
     @Override
     public boolean update(Employee employee) {

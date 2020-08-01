@@ -12,6 +12,9 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
+    private static final String ID_IS_EMPTY = "ID is empty";
+    private static final String SUCCESS = "success";
+    private static final String FAIL = "fail";
     private final EmployeeService employeeService;
 
     @Autowired
@@ -32,9 +35,9 @@ public class EmployeeController {
     @PutMapping
     public String updateEmployee(@RequestBody Employee employee) {
         if (employee.getId() == null) {
-            return "ID is empty";
+            return ID_IS_EMPTY;
         }
-        return employeeService.update(employee) ? "success" : "fail";
+        return employeeService.update(employee) ? SUCCESS : FAIL;
     }
 
     @DeleteMapping("/{employeeID}")
